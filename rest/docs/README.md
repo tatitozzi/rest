@@ -6,7 +6,7 @@
 
 São arquivos PHP que retornam um array padrão que informa para a aplicação o que fazer ao receber requisições HTTP, por padrão estes arquivos devem estar alocados na pasta `./actions`, porém este local pode ser definido no arquivo de configurações [config.php](config.php.md).
 
-Nestes arquivos `$this` é uma instância da classe [HandlerActions]().
+Nestes arquivos `$this` é uma instância da classe [HandlerActions](HandlerActions.php.md).
 
 ### 1.1 Padrão dos arquivos `action.php`
 
@@ -59,13 +59,15 @@ Sendo que:
 
 É a chave e valor que define para aplicação qual função executar assim que os valores enviados pela [URL query-string]() e pelo [corpo da requisição HTTP]() forem tratados.
 
-A variavel `$this` no escopo da função `function-callback**` é uma intância da classe [HandlerActions]().
+A variavel `$this` no escopo da função `function-callback**` é uma intância da classe [HandlerActions](HandlerActions.php.md).
 
 O retorno desta função deve conter a resposta que será enviada pela requisição HTTP, note que este retorno deve estar no fomato nativo PHP (array, string, bool, int etc) pois o mesmo será formatado conforme a solicitação do cliente.
 
 ## 2. O que são Helpers 
 
-São arquivos PHP que retornam funções que podem ser executadas utilizando o métodos _helper(string)_ da classe [Handler](), este objeto pode ser acessado nos escopos helper, actions e automators, por padrão estes arquivos devem estar alocados na pasta `./helpers`, porém este local pode ser definido no arquivo de configurações [config.php](config.php.md).
+São arquivos PHP que retornam funções que podem ser executadas utilizando o método _helper(string)_ da classe [Handler](Handler.php.md), objetos que herdam da classe Handler podem ser acessados utilizando a variavel `$this` nos escopos helper, actions e automators, por padrão estes arquivos devem estar alocados na pasta `./helpers`, porém este local pode ser definido no arquivo de configurações [config.php](config.php.md).
+
+Nestes arquivos `$this` é uma instância da classe [HandlerHelpersValidators](HandlerHelpersValidators.php.md).
 
 Exemplo:
 
@@ -125,6 +127,10 @@ return function(string $value) {
 
 ..., por padrão estes arquivos devem estar alocados na pasta `./validators`, porémesteo local pode serdefinido no arquivo de configurações [config.php](config.php.md).
 
+Nestes arquivos `$this` é uma instância da classe [HandlerHelpersValidators](HandlerHelpersValidators.php.md).
+
 ## 4. O que são Automators
 
 ..., por padrão estes arquivos devem estar alocados na pasta `./automators`, porémesteo local pode serdefinido no arquivo de configurações [config.php](config.php.md).
+
+Nestes arquivos `$this` é uma instância da classe [HandlerActions](HandlerActions.php.md).
