@@ -21,9 +21,9 @@ toc::[]
 ----
 return [
     'método-http' => [
-        'query' => ['array-validate**'],
-        'body' => ['array-validate**]',
-        'execute' => 'function-callback**'
+        'query' => ['array-validate¨¨¨¨'],
+        'body' => ['array-validate¨¨¨¨]',
+        'execute' => 'function-callback¨¨¨¨'
     ]
 ];
 ----
@@ -36,10 +36,11 @@ Referece a qual método da requisição HTTP você deseja tratar, podendo ser ge
 
 Define para a aplicação como tratar os dados recebidos pela requisição HTTP, _a chave query_ trata os dados oriundos da [URL query-string](), e _a chave body_ trata os dados oriundos do [corpo da requisição HTTP]().
 
-O padrão de valor para estas chaves é o [array-validate**]()
+O padrão de valor para estas chaves é o [array-validate¨¨¨¨]()
 
 Segue tabela, referente ao momentos em que estas chaves são utilizadas pela aplicação: 
 
+[width="100%"]
 |=========================
 | Método | query | body
 | GET    | ✓ sim | ✗ sim 
@@ -48,12 +49,13 @@ Segue tabela, referente ao momentos em que estas chaves são utilizadas pela apl
 | DELETE | ✓ sim | ✗ sim 
 |=========================
 
-==== 1.1.4 O Valor `array-validate**`
+==== O Valor `array-validate¨¨¨¨`
 
 [source%mixed,php]
 ----
 'CHAVE' => [ NULO-VAZIO, 'VALIDATOR', ...VALIDATOR-PARAMETROS ]
 ----
+
 Sendo que:
 
 - __CHAVE__: refere-se a chave do valor recebido  pela requisição HTTP.
@@ -61,15 +63,15 @@ Sendo que:
 - __VALIDATOR__: string. Refere-se ao nome do [validator]() que será executado ao verificar consistencia deste campo.
 - __VALIDATOR-PARAMETROS__: refere-se a list de parâmetros a serem passados para [validator]() no momento de sua execução.
 
-==== 1.1.5 A Chave `callback` e o Valor `function-callback**`
+==== Chave `callback` e o Valor `function-callback¨¨¨¨`
 
 É a chave e valor que define para aplicação qual função executar assim que os valores enviados pela [URL query-string]() e pelo [corpo da requisição HTTP]() forem tratados.
 
-A variavel `$this` no escopo da função `function-callback**` é uma intância da classe [HandlerActions](HandlerActions.php.md).
+A variavel `$this` no escopo da função `function-callback¨¨¨¨` é uma intância da classe [HandlerActions](HandlerActions.php.md).
 
 O retorno desta função deve conter a resposta que será enviada pela requisição HTTP, note que este retorno deve estar no fomato nativo PHP (array, string, bool, int etc) pois o mesmo será formatado conforme a solicitação do cliente.
 
-== 2. O que são Helpers 
+== O que são Helpers 
 
 São arquivos PHP que 
 
