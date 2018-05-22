@@ -4,7 +4,7 @@
 
 ## 1. O que são Actions 
 
-São arquivos PHP que retornam um array padrão que informa para a aplicação o que fazer ao receber requisições HTTP, por padrão estes arquivos devem estar alocados na pasta `./actions`, porém o local pode ser configurado no arquivo [config.php]().
+São arquivos PHP que retornam um array padrão que informa para a aplicação o que fazer ao receber requisições HTTP, por padrão estes arquivos devem estar alocados na pasta `./actions`, porém este local pode ser definido no arquivo de configurações [config.php](config.php.md).
 
 Nestes arquivos `$this` é uma instância da classe [HandlerActions]().
 
@@ -65,7 +65,7 @@ O retorno desta função deve conter a resposta que será enviada pela requisiç
 
 ## 2. O que são Helpers 
 
-São arquivos PHP que retornam funções que podem ser executadas utilizando o métodos _helper(string)_ da classe [Handler](), este objeto pode ser acessado nos escopos helper, actions e automators, por padrão estes arquivos devem estar alocados na pasta `./helpers`, porém o local pode ser configurado no arquivo [config.php]().
+São arquivos PHP que retornam funções que podem ser executadas utilizando o métodos _helper(string)_ da classe [Handler](), este objeto pode ser acessado nos escopos helper, actions e automators, por padrão estes arquivos devem estar alocados na pasta `./helpers`, porém este local pode ser definido no arquivo de configurações [config.php](config.php.md).
 
 Exemplo:
 
@@ -123,8 +123,8 @@ return function(string $value) {
 
 ## 3. O que são Validators
 
-..., por padrão estes arquivos devem estar alocados na pasta `./validators`, porém o local pode ser configurado no arquivo [config.php]().
+..., por padrão estes arquivos devem estar alocados na pasta `./validators`, porémesteo local pode serdefinido no arquivo de configurações [config.php](config.php.md).
 
 ## 4. O que são Automators
 
-..., por padrão estes arquivos devem estar alocados na pasta `./automators`, porém o local pode ser configurado no arquivo [config.php]().
+..., por padrão estes arquivos devem estar alocados na pasta `./automators`, porémesteo local pode serdefinido no arquivo de configurações [config.php](config.php.md).
