@@ -13,7 +13,7 @@ toc::[]
 
 == Configurações
 
-As configurações são feitas no arquivo ´config.php´ (..)
+As configurações são feitas no arquivo `config.php` (..)
 
 == Rest
 
@@ -21,26 +21,44 @@ As configurações são feitas no arquivo ´config.php´ (..)
 
 === O que são Actions 
 
-São arquivos que determinam as ações que a aplicação executará conforme o método de acesso da `requisição HTTP`, além de tratar as entradas de informações enviadas pela `query-string` e `body` da `requisição HTTP`.
+São arquivos que determinam as ações que a aplicação executará conforme o método de acesso da `requisição HTTP`, além de tratar as entradas de informações enviadas pela `query-string` e `body-content` da `requisição HTTP`.
 
-...
+(..)
+
+A variavel `$this` dentro de uma funcão `callback` tem o contexto `HandlerHelpersValidators`
 
 === O que são Helpers 
 
-São arquivos que retornam funções que podem facilitar tarefas comuns da apicação, a variavel `$this` dentro de uma funcão `heper` tem o contexto `HandlerHelpersValidators` e pode ser acessada em qualquer outro contexo, utilizando a seguinte sintaxe:
+São arquivos que retornam funções que podem facilitar tarefas comuns da apicação (..)
+
+A variavel `$this` dentro de uma funcão `helper` tem o contexto `HandlerHelpersValidators` e pode ser acessada em qualquer outro contexo, utilizando a seguinte sintaxe:
 
 [source,php]
 ....
-$this->helper(nome do helper)(parâmetros);
+$this->helper(nome_do_helper)(... parametros);
 ....
+
+Helpers por padrão são armazenados na pasta `./helpers`, porém é possível configurar este local no arquivo `config.php`, através da entrada `folder -> helper`.
+
+(..)
 
 === O que são Validators
 
-...
+São arquivos que retornam funções que podem validam dados, estes arquivos são executados no momento em que as informações oriundas `query-string` e `body-content` da `requisição HTTP` são verificadas (..), 
+
+A variavel `$this` dentro de uma funcão `validator` tem o contexto `HandlerHelpersValidators`.
+
+(..)
+
+Validators por padrão são armazenados na pasta `./validators`, porém é possível configurar este local no arquivo `config.php`, através da entrada `folder -> validator`.
 
 === O que são Automators
 
-...
+(..), 
+
+A variavel `$this` dentro de uma funcão `automator` tem o contexto `????`
+
+Automators por padrão são armazenados na pasta `./automators`, porém é possível configurar este local no arquivo `config.php`, através da entrada `folder -> automator`.
 
 === Contextos
 
