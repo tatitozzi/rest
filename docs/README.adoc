@@ -40,14 +40,13 @@ O padrão de valor para estas chaves é o [array-validate**]()
 
 Segue tabela, referente ao momentos em que estas chaves são utilizadas pela aplicação: 
 
-|=======================
-| Método | query | body |
-|--------|:-----:|:----:|
-| GET    | ✓ sim | ✗ sim |
-| PUT    | ✓ sim | ✓ sim |   
-| POST   | ✗ não | ✓ não |
-| DELETE | ✓ sim | ✗ sim |
-|=======================
+|=========================
+| Método | query | body
+| GET    | ✓ sim | ✗ sim 
+| PUT    | ✓ sim | ✓ sim    
+| POST   | ✗ não | ✓ não 
+| DELETE | ✓ sim | ✗ sim 
+|=========================
 
 ==== 1.1.4 O Valor `array-validate**`
 
