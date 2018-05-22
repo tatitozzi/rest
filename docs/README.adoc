@@ -11,76 +11,49 @@
 
 toc::[]
 
-== ??
+== Configurações
 
-=== config.php
+As configurações são feitas no arquivo ´config.php´ (..)
 
-...
-
-=== autoloader.php
-
-...
-
-== Classes
-
-...
-
-=== Rest
-
-...
-
-=== Handler
-
-...
-
-=== HandlerActions
-
-...
-
-=== HandlerHelpersValidators
-
-...
-
-== Conceitos
+== Rest
 
 ...
 
 === O que são Actions 
 
-...
-
-==== Padrão dos Arquivos `action.php`
-
-...
-
-===== A Chave `método-http`
-
-...
-
-==== As Chaves `query` e `body`
-
-...
-
-|=========================
-| Método | query | body
-| GET    | ✓ sim | ✗ sim 
-| PUT    | ✓ sim | ✓ sim    
-| POST   | ✗ não | ✓ não 
-| DELETE | ✓ sim | ✗ sim 
-|=========================
-
-===== O Valor `array-validate¨¨¨¨`
+São arquivos que determinam as ações que a aplicação executará conforme o método de acesso da `requisição HTTP`, além de tratar as entradas de informações enviadas pela `query-string` e `body` da `requisição HTTP`.
 
 ...
 
 === O que são Helpers 
 
-...
+São arquivos que retornam funções que podem facilitar tarefas comuns da apicação, a variavel `$this` dentro de uma funcão `heper` tem o contexto `HandlerHelpersValidators` e pode ser acessada em qualquer outro contexo, utilizando a seguinte sintaxe:
+
+[source,php]
+....
+$this->helper(nome do helper)(parâmetros);
+....
 
 === O que são Validators
 
 ...
 
 === O que são Automators
+
+...
+
+=== Contextos
+
+...
+
+==== HandlerHelpersValidatos
+
+...
+
+==== HandlerActions
+
+...
+
+== OAth2
 
 ...
