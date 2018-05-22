@@ -1,6 +1,6 @@
 <?php
 
-namespace router;
+namespace rest;
 
 spl_autoload_register(function ($class) {
     if (strpos($class, __NAMESPACE__) !== 0) 

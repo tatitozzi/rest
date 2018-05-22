@@ -1,6 +1,6 @@
 <?php
 
-namespace router;
+namespace rest;
 
 class HandlerForHelpersAndValidators extends Handler {
     protected $helpersLoaded;

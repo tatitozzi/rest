@@ -1,6 +1,6 @@
 <?php
 
-namespace router;
+namespace rest;
 
 class Handler {
     const PS = DIRECTORY_SEPARATOR;

@@ -1,10 +1,11 @@
 <?php 
 
 // http://www.restapitutorial.com/httpstatuscodes.html
+// http://blog.caelum.com.br/rest-principios-e-boas-praticas/
 
-namespace router;
+namespace rest;
 
-class Router {
+class Rest {
     const PS = DIRECTORY_SEPARATOR;
     const DIR = __DIR__ . Self::PS;
 

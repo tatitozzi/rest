@@ -1,6 +1,6 @@
 <?php
 
-namespace router;
+namespace rest;
 
 class HandlerActions extends HandlerForHelpersAndValidators {
     protected $automaatorsLoaded;
