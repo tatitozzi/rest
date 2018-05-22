@@ -1,73 +1,84 @@
+= Linux Kernel Module Cheat
+:idprefix:
+:idseparator: -
+:sectanchors:
+:sectlinks:
+:sectnumlevels: 6
+:sectnums:
+:toc: macro
+:toclevels: 6
+:toc-title:
+
 toc::[]
 
-== 1. Conceitos
+== Conceitos
 
 ...
 
-== 1.1 O Que são Actions
+== O Que são Actions
 
 ...
 
-=== 1.1.1 Padrão dos Arquivos `action.php`
+=== Padrão dos Arquivos `action.php`
 
 ...
 
-==== 1.1.1.1 A Chave `método-http`
+==== Chave `método-http`
 
 ...
 
-==== 1.1.1.2 As Chaves `query` e `body`
+==== As Chaves `query` e `body`
 
 ...
 
-==== 1.1.1.3 O Valor `array-validate**`
+==== Valor `array-validate**`
 
 ...
 
-==== 1.1.1.4 A Chave `callback` e o Valor `function-callback**`
+==== A Chave `callback` e o Valor `function-callback**`
 
 ...
 
-== 1.2 O que são Helpers 
+== O que são Helpers 
 
 ...
 
-== 1.3 O que são Validators
+== O que são Validators
 
 ...
 
-== 1.5 O que são Automators
+== O que são Automators
 
 ...
 
-= 2. ???
+= ???
 
 ...
 
-== 2.1 config.php
+== config.php
 
 ...
 
-== 2.2 autoloader.php
+== autoloader.php
 
 ...
 
-= 3. Classes
+= Classes
 
 ...
 
-== 3.1 Rest
+== Rest
 
 ...
 
-== 3.2 Handler
+== Handler
 
 ...
 
-== 3.3 HandlerActions
+== HandlerActions
 
 ...
 
-== 3.4 HandlerHelpersValidators
+== HandlerHelpersValidators
 
 ...
