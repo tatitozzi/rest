@@ -3,9 +3,9 @@
 return function(string $table) {
     $cnf = $this->helper('get-action-config-by-table')($table);
     $query = $cnf->query;
-    $validate = $cnf->validate;
+    $body = $cnf->body;
     $queryComposed = [];
-    foreach(array_merge($query, $validate) as $key => $entry) {
+    foreach(array_merge($query, $body) as $key => $entry) {
         $queryComposed[$key] = [false, $entry[1]];
     }
     $queryComposed['p'] = [false, 'integer', 1];

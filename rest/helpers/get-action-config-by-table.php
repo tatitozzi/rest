@@ -2,7 +2,7 @@
 
 return function($table) {
     $query = [];
-    $validate = [];
+    $data = [];
     $tableInfo = $this->helper('get-table-info')($table);
     
     foreach($tableInfo as $column) {
@@ -15,11 +15,11 @@ return function($table) {
             $query[$name] = $settings;
             continue;
         }
-        $validate[$name] = $settings;
+        $data[$name] = $settings;
     }
 
     return (Object)[
         "query" => $query,
-        "validate" => $validate
+        "body" => $data
     ];
 };
