@@ -1,4 +1,4 @@
-= Linux Kernel Module Cheat
+= Rest OAth2 Ant
 :idprefix:
 :idseparator: -
 :sectanchors:
@@ -15,70 +15,92 @@ toc::[]
 
 ...
 
-== O Que são Actions
+=== O Que são Actions
+
+São arquivos PHP que retornam um array padrão que informa para a aplicação o que fazer ao receber requisições HTTP, por padrão estes arquivos devem estar alocados na pasta `./actions`, porém este local pode ser definido no arquivo de configurações [config.php](config.php.md).
+
+Nestes arquivos `$this` é uma instância da classe [HandlerActions](HandlerActions.php.md).
+
+==== Padrão dos Arquivos `action.php`
+
+[source%mixed,php]
+....
+return [
+    'método-http' => [
+        'query' => ['array-validate**'],
+        'body' => ['array-validate**]',
+        'execute' => 'function-callback**'
+    ]
+];
+....
+
+===== Chave `método-http`
+
+Referece a qual método da requisição HTTP você deseja tratar, podendo ser get, put, post, delete.
+
+===== As Chaves `query` e `body`
+
+Define para a aplicação como tratar os dados recebidos pela requisição HTTP, _a chave query_ trata os dados oriundos da [URL query-string](), e _a chave body_ trata os dados oriundos do [corpo da requisição HTTP]().
+
+O padrão de valor para estas chaves é o [array-validate**]()
+
+Segue tabela, referente ao momentos em que estas chaves são utilizadas pela aplicação: 
+
+| Método | query | body |
+|--------|:-----:|:----:|
+| GET    | ✓ sim | ✗ sim |
+| PUT    | ✓ sim | ✓ sim |   
+| POST   | ✗ não | ✓ não |
+| DELETE | ✓ sim | ✗ sim |
+
+===== Valor `array-validate**`
 
 ...
 
-=== Padrão dos Arquivos `action.php`
+===== A Chave `callback` e o Valor `function-callback**`
 
 ...
 
-==== Chave `método-http`
+=== O que são Helpers 
 
 ...
 
-==== As Chaves `query` e `body`
+=== O que são Validators
 
 ...
 
-==== Valor `array-validate**`
+=== O que são Automators
 
 ...
 
-==== A Chave `callback` e o Valor `function-callback**`
+== ???
 
 ...
 
-== O que são Helpers 
+=== config.php
 
 ...
 
-== O que são Validators
+=== autoloader.php
 
 ...
 
-== O que são Automators
+== Classes
 
 ...
 
-= ???
+=== Rest
 
 ...
 
-== config.php
+=== Handler
 
 ...
 
-== autoloader.php
+=== HandlerActions
 
 ...
 
-= Classes
-
-...
-
-== Rest
-
-...
-
-== Handler
-
-...
-
-== HandlerActions
-
-...
-
-== HandlerHelpersValidators
+=== HandlerHelpersValidators
 
 ...
