@@ -7,20 +7,40 @@
 
 ### 1.1 Padrão dos Arquivos `action.php`
 
-
+```php
+return [
+    'método-http' => [
+        'query' => ['array-validate**'],
+        'body' => ['array-validate**]',
+        'execute' => 'function-callback**'
+    ]
+];
+```
 
 #### 1.1.1 A Chave `método-http`
 
+Referece a qual método da requisição HTTP você deseja tratar, podendo ser get, put, post, delete.
 
 #### 1.1.2 As Chaves `query` e `body`
 
+Define para a aplicação como tratar os dados recebidos pela requisição HTTP, _a chave query_ trata os dados oriundos da [URL query-string](), e _a chave body_ trata os dados oriundos do [corpo da requisição HTTP]().
 
+O padrão de valor para estas chaves é o [array-validate**]()
+
+Segue tabela, referente ao momentos em que estas chaves são utilizadas pela aplicação: 
+
+| Método | query | body |
+|--------|:-----:|:----:|
+| GET    | ✓ sim | ✗ sim |
+| PUT    | ✓ sim | ✓ sim |   
+| POST   | ✗ não | ✓ não |
+| DELETE | ✓ sim | ✗ sim |
 
 #### 1.1.4 O Valor `array-validate**`
 
-....php
+```php
 'CHAVE' => [ NULO-VAZIO, 'VALIDATOR', ...VALIDATOR-PARAMETROS ]
-....
+```
 Sendo que:
 
 - __CHAVE__: refere-se a chave do valor recebido  pela requisição HTTP.
@@ -52,19 +72,17 @@ Criando um helper e apenas concatena um valor recebido com a string `world!!!`.
 
 ./_helpers_/example.php
 
-....P
-
-PP
+```Php
 return function(string $value) {
     return "{$value} world!!!";
 }
-....
+```
 
 A seguir vemos como utilizar o helper _example_ em um [action]().
 
 ./_actions_/example.php
 
-....PHP
+```PHP
 return [
     'método-http' => [
         'query' => ...,
@@ -75,13 +93,13 @@ return [
         }
     ]
 ];
-....
+```
 
 A seguir vemos como utilizar o helper _example_ em um [automator]().
 
 ./_automators_/example.php
 
-....PHP
+```PHP
 return function() {
     $value = $this->helper('example')('hello');
     return [
@@ -94,17 +112,17 @@ return function() {
         ]
     ];
 );
-....
+```
 
 A seguir vemos como utilizar o helper _example_ em outro helper.
 
 ./_helpers_/other-example.php
 
-....PHP
+```PHP
 return function(string $value) {
     return "this will run the example helper: " . $this->helper('example')('hello');
 }
-....
+```
 
 ## 3. O que são Validators
 
