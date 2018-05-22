@@ -80,7 +80,7 @@ return function(string $value) {
 }
 ```
 
-Utilizando o helper criado em um [action]().
+A seguir vemos como utilizar o helper _example_ em um [action]().
 
 ./_actions_/example.php
 ```PHP
@@ -96,7 +96,7 @@ return [
 ];
 ```
 
-Utilizando o helper criado em um [automator]().
+A seguir vemos como utilizar o helper _example_ em um [automator]().
 
 ./_automators_/example.php
 ```PHP
@@ -114,7 +114,7 @@ return function() {
 );
 ```
 
-Utilizando o helper criado em outro helper.
+A seguir vemos como utilizar o helper _example_ em outro helper.
 
 ./_helpers_/other-example.php
 ```PHP
