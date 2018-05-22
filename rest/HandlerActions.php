@@ -2,7 +2,7 @@
 
 namespace rest;
 
-class HandlerActions extends HandlerForHelpersAndValidators {
+class HandlerActions extends HandlerHelpersValidators {
     protected $automaatorsLoaded;
 
     function automator($automatorName) {

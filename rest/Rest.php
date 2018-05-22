@@ -31,7 +31,7 @@ class Rest {
             $this->parseAction();
             $this->parseQuery();
             $this->parseData();
-            $this->handlerHelperAndValidators();
+            $this->handlerHelperValidators();
             $this->pdo();
             $this->loadAction();
             $this->checkQuery();
@@ -47,14 +47,14 @@ class Rest {
         }
     }
 
-    protected function handlerHelperAndValidators() {
+    protected function handlerHelperValidators() {
         $this->handlersProxy = [
             "action" => &$this->actionInfo,
             "query"  => &$this->query,
             "data"   => &$this->data,
             "pdo"    => &$this->pdo,
         ];
-        $this->handlerHelperAndValidators = new HandlerForHelpersAndValidators($this->config, $this->handlersProxy);
+        $this->handlerHelperValidators = new HandlerHelpersValidators($this->config, $this->handlersProxy);
     }
 
     protected function pdo() {
@@ -74,10 +74,10 @@ class Rest {
     }
 
     protected function executeCallback() {
-        if (!isset($this->action['execute']))
+        if (!isset($this->action['callback']))
             return;
 
-        $callback = $this->action['execute']->bindTo($this->handlerHelperAndValidators);
+        $callback = $this->action['callback']->bindTo($this->handlerHelperValidators);
         echo json_encode($callback());
     }
 
@@ -110,7 +110,7 @@ class Rest {
             return $this->validatorsLoaded[$validatorName];
         
         if (file_exists($file = $this->config['folder']['validator'].Self::PS.$validatorName.".php"))
-            return $this->validatorsLoaded[$validatorName] = (require $file)->bindTo($this->handlerHelperAndValidators);            
+            return $this->validatorsLoaded[$validatorName] = (require $file)->bindTo($this->handlerHelperValidators);            
         
         throw new \Exception("Validor `{$validatorName}` not found.", 500);
     }
@@ -157,10 +157,10 @@ class Rest {
         if ($this->method == 'get')
             return;
 
-        if (!isset($this->action['validate']))
+        if (!isset($this->action['body']))
             return;
         
-        $this->data = $this->checkParameters($this->action['validate'], $this->data);
+        $this->data = $this->checkParameters($this->action['body'], $this->data);
     }
     
     protected function parseAction() {

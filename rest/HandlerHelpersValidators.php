@@ -2,7 +2,7 @@
 
 namespace rest;
 
-class HandlerForHelpersAndValidators extends Handler {
+class HandlerHelpersValidators extends Handler {
     protected $helpersLoaded;
 
     function helper($helperName) {

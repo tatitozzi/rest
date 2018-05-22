@@ -8,18 +8,18 @@ return [
             'p'  => [false, 'integer', 1],
             'r'  => [false, 'integer', 10]   
         ],
-        'execute' => function() {
+        'callback' => function() {
             return $this->helper('default-select')('pessoa', $this->query['p'], $this->query['r']);
         }
     ],
 
     'post' => [
-        'validate' => [
+        'body' => [
             'nome'     => [true , 'nome-completo'],
             'telefone' => [false, 'any'],
             'email'    => [true , 'any']
         ],
-        'execute' => function() {
+        'callback' => function() {
             $id = $this->helper('default-insert')('pessoa');
             return "`{$this->data['nome']}` inserido com sucesso, com o id: $id";
         }
@@ -29,12 +29,12 @@ return [
         'query' => [
             'id' => [true, 'integer']
         ],
-        'validate' => [
+        'body' => [
             'nome'     => [true , 'nome-completo'],
             'telefone' => [false, 'any'],
             'email'    => [true , 'any']
         ],
-        'execute' => function() {
+        'callback' => function() {
             $qtd = $this->helper('default-update')('pessoa');
             return "$qtd fulano(s) alterado(s) com sucesso";
         }
@@ -44,7 +44,7 @@ return [
         'query' => [
             'id' => [true, 'integer']
         ],
-        'execute' => function() {
+        'callback' => function() {
             $qtd = $this->helper('default-delete')('pessoa');
             return "$qtd fulano(s) deletado(s) com sucesso";
         }

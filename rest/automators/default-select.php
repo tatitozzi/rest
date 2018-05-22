@@ -12,7 +12,7 @@ return function(string $table) {
     $queryComposed['r'] = [false, 'integer', 5];
     return [
         'query' => $queryComposed,
-        'execute' => function() use ($table) {
+        'callback' => function() use ($table) {
             return $this->helper('default-select')(
                 $table, 
                 $this->query['p'], 
