@@ -11,36 +11,56 @@
 
 toc::[]
 
-== O que são Actions 
+== ??
+
+=== config.php
 
 ...
 
-=== Padrão dos Arquivos `action.php`
+=== autoloader.php
 
-[source%mixed,php]
-----
-return [
-    'método-http' => [
-        'query' => ['array-validate¨¨¨¨'],
-        'body' => ['array-validate¨¨¨¨]',
-        'execute' => 'function-callback¨¨¨¨'
-    ]
-];
-----
+...
 
-==== A Chave `método-http`
+== Classes
 
-Referece a qual método da requisição HTTP você deseja tratar, podendo ser get, put, post, delete.
+...
+
+=== Rest
+
+...
+
+=== Handler
+
+...
+
+=== HandlerActions
+
+...
+
+=== HandlerHelpersValidators
+
+...
+
+== Conceitos
+
+...
+
+=== O que são Actions 
+
+...
+
+==== Padrão dos Arquivos `action.php`
+
+...
+
+===== A Chave `método-http`
+
+...
 
 ==== As Chaves `query` e `body`
 
-Define para a aplicação como tratar os dados recebidos pela requisição HTTP, _a chave query_ trata os dados oriundos da [URL query-string](), e _a chave body_ trata os dados oriundos do [corpo da requisição HTTP]().
+...
 
-O padrão de valor para estas chaves é o [array-validate¨¨¨¨]()
-
-Segue tabela, referente ao momentos em que estas chaves são utilizadas pela aplicação: 
-
-[width="100%"]
 |=========================
 | Método | query | body
 | GET    | ✓ sim | ✗ sim 
@@ -49,114 +69,18 @@ Segue tabela, referente ao momentos em que estas chaves são utilizadas pela apl
 | DELETE | ✓ sim | ✗ sim 
 |=========================
 
-==== O Valor `array-validate¨¨¨¨`
+===== O Valor `array-validate¨¨¨¨`
 
-[source%mixed,php]
-----
-'CHAVE' => [ NULO-VAZIO, 'VALIDATOR', ...VALIDATOR-PARAMETROS ]
-----
+...
 
-Sendo que:
+=== O que são Helpers 
 
-- __CHAVE__: refere-se a chave do valor recebido  pela requisição HTTP.
-- __NULO-VAZIO__: booleno. Refere-se é uma chave obrigatório ou não, se definido como true, a aplicação retornará erro 400 caso o valor não seja informado no [corpo da requisição HTTP]().
-- __VALIDATOR__: string. Refere-se ao nome do [validator]() que será executado ao verificar consistencia deste campo.
-- __VALIDATOR-PARAMETROS__: refere-se a list de parâmetros a serem passados para [validator]() no momento de sua execução.
+...
 
-==== Chave `callback` e o Valor `function-callback¨¨¨¨`
+=== O que são Validators
 
-É a chave e valor que define para aplicação qual função executar assim que os valores enviados pela [URL query-string]() e pelo [corpo da requisição HTTP]() forem tratados.
+...
 
-A variavel `$this` no escopo da função `function-callback¨¨¨¨` é uma intância da classe [HandlerActions](HandlerActions.php.md).
+=== O que são Automators
 
-O retorno desta função deve conter a resposta que será enviada pela requisição HTTP, note que este retorno deve estar no fomato nativo PHP (array, string, bool, int etc) pois o mesmo será formatado conforme a solicitação do cliente.
-
-== O que são Helpers 
-
-São arquivos PHP que 
-
-retornam funções que podem ser executadas utilizando o método _helper(string)_ da classe [Handler](Handler.php.md)e herdam da classe Handler podem ser acessados utilizando a variavel `$th
-
-is` nos escopos helper, actions e automators, por padrão estes arquivos devem estar alocados na pasta `./helpers`, porém este local pode ser definido no arquivo de configurações [config.php](config.php.md).
-
-Nestes arquivos `$this` é uma instância da classe [HandlerHelpersValidators](HandlerHelpersValidators.php.md).
-
-Exemplo:
-
-Criando um helper e apenas concatena um valor recebido com a string `world!!!`.
-
-./_helpers_/example.php
-
-[source%mixed,php]
-----
-return function(string $value) {
-    return "{$value} world!!!";
-}
-----
-
-A seguir vemos como utilizar o helper _example_ em um [action]().
-
-./_actions_/example.php
-
-[source%mixed,php]
-----
-return [
-    'método-http' => [
-        'query' => ...,
-        'body' => ...,
-        'execute' => function () {
-            $value = $this->helper('example')('hello');
-            return $value;
-        }
-    ]
-];
-----
-
-A seguir vemos como utilizar o helper _example_ em um [automator]().
-
-./_automators_/example.php
-
-[source%mixed,php]
-----
-return function() {
-    $value = $this->helper('example')('hello');
-    return [
-        'método-http' => [
-            'query' => ...,
-            'body' => ...,
-            'execute' => function () use ($value) {
-                return $value;
-            }
-        ]
-    ];
-);
-----
-
-A seguir vemos como utilizar o helper _example_ em outro helper.
-
-./_helpers_/other-example.php
-
-[source%mixed,php]
-----
-return function(string $value) {
-    return "this will run the example helper: " . $this->helper('example')('hello');
-}
-----
-
-== 3. O que são Validators
-
-São arquivos PHP que retornam funções que podem ser executadas no momento da validação dos valores recebidos por [URL query-string]() e [corpo da requisição HTTP](), caso a função lance um exceção esta será retornada com status 400 e o corpo será a mensagem da exceção. 
-
-O valor retornado por esta função sobreescreverá os valores enviados por [URL query-string]() e [corpo da requisição HTTP](), acessados a partir dos objetos da classe [Handler](). 
-
-Por padrão estes arquivos de. Por padrão estes arquivos devem estar alocados na pasta `./validators`, porémesteo local pode serdefinido no arquivo de configurações [config.php](config.php.md).
-
-Nestes arquivos `$this` é uma instância da classe [HandlerHelpersValidators](HandlerHelpersValidators.php.md).
-
-== 4. O que são Automators
-
-..., 
-
-Por padrão estes arquivos devem estar alocados na pasta `./automators`, porémesteo local pode serdefinido no arquivo de configurações [config.php](config.php.md).
-
-Nestes arquivos `$this` é uma instância da classe [HandlerActions](HandlerActions.php.md).
+...
