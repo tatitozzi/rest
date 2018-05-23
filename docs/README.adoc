@@ -20,13 +20,7 @@ toc::[]
 - permitir outros tipos de retorno além do JSON (XML)
 
 == Fluxo das Requisições e respostas
-[source,role="console"]
-----
-$ ls
-index.adoc
-$
-----
-
+[.console]
 ....
                                    ┌─────────────┐                         ┌──────────────┐
    ┌─────────┐                     │ SERVIDOR DE │                         │ SERVIDOR DE  │
