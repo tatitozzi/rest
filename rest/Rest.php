@@ -40,13 +40,12 @@ class Rest {
         } catch(\Exception $ex) {
             header("Content-Type: application/json");
             http_response_code($ex->getCode());
-            echo json_encode([
-                'error' => [
-                    'code' => '... to do ... create a internal error code ...',
-                    'message' => $ex->getMessage(),
-                // 'stackTrace' => $ex->getTraceAsString()
-                ]
-            ]);
+            $response = ['error'=>[]];
+            $response['error']['code'] = '... make a custom Exception to trace intercar erros code, not just http status ...';
+            $response['error']['message'] = $ex->getMessage();
+            if ($this->config['system']['error']['trace']) 
+                $response['error']['trace'] = $ex->getTrace();
+            echo json_encode($response);
         }
     }
 
