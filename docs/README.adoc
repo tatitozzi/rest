@@ -20,7 +20,7 @@ toc::[]
 - permitir outros tipos de retorno além do JSON (XML)
 
 == Fluxo das Requisições e respostas
-[line-height=1.3em]
+[lineHeight=1.3em]
 ....
                                    ┌─────────────┐                         ┌──────────────┐
    ┌─────────┐                     │ SERVIDOR DE │                         │ SERVIDOR DE  │
