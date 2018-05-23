@@ -22,42 +22,42 @@ toc::[]
 == Fluxo das Requisições e respostas
 
 ....
-                                  ┌───────────────┐                         ┌───────────────┐
-   ┌─────────┐                    │  SERVIDOR DE  │                         │  SERVIDOR DE  │
-   │ CLIENTE │                    │   APLICAÇÃO   │                         │  AUTENTICAÇÃO │
-   └────┬────┘                    └──────┬────────┘                         └──────┬────────┘
-        │                                │                                         │	
-        │                                │                                         │	
-        ├───┤ Authorization Grant ├──────┼────────────────────────────────────────>│	
-        │                                │                                         │	
-        │                                │                                         │	
-        │<───────────────────────────────┼──────┤ Access Token & Refresh Token ├───┤	
-        │                                │                                         │	
-        │                                │                                         │	
-        ├───┤ HTTP REQUEST + TOKEN ├────>│                                         │	
-        │                                │                                         │	
-        │                                │                                         │ 
-        │                                │     ┌───────────────────────────┐       │	
-        │                                ├────>│ loadConfig()              │       │	
-        │                                │     │ parse()                   │       │	
-        │                                │     │ ↳ parseMethod()           │       │
-        │                                │     │ ↳ parseAction()           │       │	
-        │                                │     │ ↳ parseQuery()            │       │	
-        │                                │     │ ↳ parseBody()             │       │	
-        │                                │     │ handlerHelperValidators() │       │	
-        │                                │     │ pdo()                     │       │	
-        │                                │     │ loadAction()              │       │	
-        │                                │     │ check()                   │       │	
-        │                                │     │ ↳ checkQuery()            │       │	
-        │                                │     │ ↳ checkBody()             │       │	
-        │                                │     │ executeCallback()         │       │	
-        │                                │<────┤ trata o retorno()         │       │	
-        │                                │     └───────────────────────────┘       │	
-        │                                │                                         │	
-        │                                │                                         │	
-        │<────────────┤ HTTP RESPONSE ├──┤                                         │	
-        │                                │                                         │	
-        │                                │                                         │	
+                                   ┌─────────────┐                         ┌──────────────┐
+   ┌─────────┐                     │ SERVIDOR DE │                         │ SERVIDOR DE  │
+   │ CLIENTE │                     │  APLICAÇÃO  │                         │ AUTENTICAÇÃO │
+   └────┬────┘                     └─────┬───────┘                         └─────┬────────┘
+        │                                │                                       │	
+        │                                │                                       │	
+        ├───┤ Authorization Grant ├──────┼──────────────────────────────────────>│	
+        │                                │                                       │	
+        │                                │                                       │	
+        │<───────────────────────────────┼────┤ Access Token & Refresh Token ├───┤	
+        │                                │                                       │	
+        │                                │                                       │	
+        ├───┤ HTTP REQUEST + TOKEN ├────>│                                       │	
+        │                                │                                       │	
+        │                                │                                       │ 
+        │                                │     ┌───────────────────────────┐     │	
+        │                                ├────>│ loadConfig()              │     │	
+        │                                │     │ parse()                   │     │	
+        │                                │     │ ↳ parseMethod()           │     │
+        │                                │     │ ↳ parseAction()           │     │	
+        │                                │     │ ↳ parseQuery()            │     │	
+        │                                │     │ ↳ parseBody()             │     │	
+        │                                │     │ handlerHelperValidators() │     │	
+        │                                │     │ pdo()                     │     │	
+        │                                │     │ loadAction()              │     │	
+        │                                │     │ check()                   │     │	
+        │                                │     │ ↳ checkQuery()            │     │	
+        │                                │     │ ↳ checkBody()             │     │	
+        │                                │     │ executeCallback()         │     │	
+        │                                │<────┤ trata o retorno()         │     │	
+        │                                │     └───────────────────────────┘     │	
+        │                                │                                       │	
+        │                                │                                       │	
+        │<────────────┤ HTTP RESPONSE ├──┤                                       │	
+        │                                │                                       │	
+        │                                │                                       │	
  
 ....
 
