@@ -21,6 +21,11 @@ toc::[]
 
 == Fluxo das Requisições e respostas
 
+[sidebar#audience.text-justify]
+--
+This content appears in a sidebar with id "audience" and justified text.
+--
+
 .... 
                                    ┌─────────────┐                         ┌──────────────┐
    ┌─────────┐                     │ SERVIDOR DE │                         │ SERVIDOR DE  │
