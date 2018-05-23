@@ -22,55 +22,43 @@ toc::[]
 == Fluxo das Requisições e respostas
 
 ....
-┌─┬┐  ╔═╦╗  ╓─╥╖  ╒═╤╕
-│ ││  ║ ║║  ║ ║║  │ ││
-├─┼┤  ╠═╬╣  ╟─╫╢  ╞═╪╡
-└─┴┘  ╚═╩╝  ╙─╨╜  ╘═╧╛
-┌───────────────────┐
-│  ╔═══╗ Some Text  │▒
-│  ╚═╦═╝ in the box │▒
-╞═╤══╩══╤═══════════╡▒
-│ ├──┬──┤           │▒
-│ └──┴──┘           │▒
-└───────────────────┘▒
-
-
-                                                SERVIDOR DE                               SERVIDOR DE
-    CLIENTE                                      APLICAÇÃO                                AUTENTICAÇÃO
-───────┬────────                              ───────┬────────                          ───────┬────────
-       │                                             │                                         │	
-       │                                             │                                         │	
-       ├───┤ Authorization Grant ├───────────────────┼────────────────────────────────────────>│	
-       │                                             │                                         │	
-       │                                             │                                         │	
-       │<────────────────────────────────────────────│──────┤ Access Token & Refresh Token ├───┤	
-       │                                             │                                         │	
-       │                                             │                                         │	
-       ├───┤ HTTP REQUEST + TOKEN ├─────────────────>│                                         │	
-       │                                             │                                         │	
-       │                                             │                                         │ 
-       │                                             │     ┌───────────────────────────┐       │	
-       │                                             ├────>│ loadConfig()              │       │	
-       │                                             │     │ parse()                   │       │	
-       │                                             │     │ ↳ parseMethod()           │       │
-       │                                             │     │ ↳ parseAction()           │       │	
-       │                                             │     │ ↳ parseQuery()            │       │	
-       │                                             │     │ ↳ parseBody()             │       │	
-       │                                             │     │ handlerHelperValidators() │       │	
-       │                                             │     │ pdo()                     │       │	
-       │                                             │     │ loadAction()              │       │	
-       │                                             │     │ check()                   │       │	
-       │                                             │     │ ↳ checkQuery()            │       │	
-       │                                             │     │ ↳ checkBody()             │       │	
-       │                                             │     │ executeCallback()         │       │	
-       │                                             │<────┤ trata o retorno()         │       │	
-       │                                             │     └───────────────────────────┘       │	
-       │                                             │                                         │	
-       │                                             │                                         │	
-       │<─────────────────────────┤ HTTP RESPONSE ├──┤                                         │	
-       │                                             │                                         │	
-       │                                             │                                         │	
-
+                                 ┌────────────────┐                        ┌────────────────┐
+┌────────────────┐               │   SERVIDOR DE  │                        │   SERVIDOR DE  │
+│    CLIENTE     │               │    APLICAÇÃO   │                        │   AUTENTICAÇÃO │
+└───────┬────────┘               └───────┬────────┘                        └───────┬────────┘
+        │                                │                                         │	
+        │                                │                                         │	
+        ├───┤ Authorization Grant ├──────┼────────────────────────────────────────>│	
+        │                                │                                         │	
+        │                                │                                         │	
+        │<───────────────────────────────┼──────┤ Access Token & Refresh Token ├───┤	
+        │                                │                                         │	
+        │                                │                                         │	
+        ├───┤ HTTP REQUEST + TOKEN ├────>│                                         │	
+        │                                │                                         │	
+        │                                │                                         │ 
+        │                                │     ┌───────────────────────────┐       │	
+        │                                ├────>│ loadConfig()              │       │	
+        │                                │     │ parse()                   │       │	
+        │                                │     │ ↳ parseMethod()           │       │
+        │                                │     │ ↳ parseAction()           │       │	
+        │                                │     │ ↳ parseQuery()            │       │	
+        │                                │     │ ↳ parseBody()             │       │	
+        │                                │     │ handlerHelperValidators() │       │	
+        │                                │     │ pdo()                     │       │	
+        │                                │     │ loadAction()              │       │	
+        │                                │     │ check()                   │       │	
+        │                                │     │ ↳ checkQuery()            │       │	
+        │                                │     │ ↳ checkBody()             │       │	
+        │                                │     │ executeCallback()         │       │	
+        │                                │<────┤ trata o retorno()         │       │	
+        │                                │     └───────────────────────────┘       │	
+        │                                │                                         │	
+        │                                │                                         │	
+        │<────────────┤ HTTP RESPONSE ├──┤                                         │	
+        │                                │                                         │	
+        │                                │                                         │	
+ 
 ....
 
 - 1. O cliente faz uma requisição HTTP para a aplicação seguindo o seguinte padrão:
