@@ -43,27 +43,23 @@ toc::[]
 │ T │   ┌──────────────┐             ┌───┐                                   │ N │	
 │   ├───┤ HTTP REQUEST ├────────────>│ R │                                   │ T │	
 │   │   └──────────────┘             │ E │                                   │ I │	
-│   │                                │ S ├────>───┐                          │ C │ 
-│   │                                │ O │   ┌────┴──────────────────────┐   │ A │	
-│   │                                │ U │   │ loadConfig()              │   │ T │	
+│   │                                │ S │                                   │ C │ 
+│   │                                │ O │   ┌───────────────────────────┐   │ A │	
+│   │                                │ U ├──>│ loadConfig()              │   │ T │	
 │   │                                │ U │   │ parse()                   │   │ I │	
-│   │                                │ C │   │   parseMethod()           │   │ O │
-│   │                                │   │   │   parseAction()           │   │ N │	
-│   │                                │ E │   │   parseQuery()            │   │   │	
-│   │                                │   │   │   parseBody()             │   │ S │	
+│   │                                │ C │   │ ↳ parseMethod()           │   │ O │
+│   │                                │   │   │ ↳ parseAction()           │   │ N │	
+│   │                                │ E │   │ ↳ parseQuery()            │   │   │	
+│   │                                │   │   │ ↳ parseBody()             │   │ S │	
 │   │                                │ S │   │ handlerHelperValidators() │   │ R │	
 │   │                                │ R │   │ pdo()                     │   │ V │	
 │   │                                │ V │   │ loadAction()              │   │   │	
 │   │                                │   │   │ check()                   │   │   │	
-│   │                                │   │   │   checkQuery()            │   │   │	
-│   │                                │   │   │   checkBody()             │   │   │	
+│   │                                │   │   │ ↳ checkQuery()            │   │   │	
+│   │                                │   │   │ ↳ checkBody()             │   │   │	
 │   │                                │   │   │ executeCallback()         │   │   │	
-│   │                                │   │   │ executeCallback()         │   │   │	
+│   │                                │   │<──┤ trata o retorno()         │   │   │	
 │   │                                │   │   └───────────────────────────┘   │   │	
-│   │                                │   │                                   │   │	
-│   │                                │   │                                   │   │	
-│   │                                │   │                                   │   │	
-│   │                                │   │                                   │   │	
 │   │             ┌───────────────┐  │   │                                   │   │	
 │   │<────────────┤ HTTP RESPONSE ├──┤   │                                   │   │	
 └───┘             └───────────────┘  └───┘                                   └───┘
