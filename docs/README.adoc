@@ -21,6 +21,12 @@ toc::[]
 
 == Fluxo das Requisições e respostas
 [source,role="console"]
+----
+$ ls
+index.adoc
+$
+----
+
 ....
                                    ┌─────────────┐                         ┌──────────────┐
    ┌─────────┐                     │ SERVIDOR DE │                         │ SERVIDOR DE  │
