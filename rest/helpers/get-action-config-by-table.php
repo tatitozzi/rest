@@ -2,7 +2,7 @@
 
 return function($table) {
     $query = [];
-    $data = [];
+    $body = [];
     $tableInfo = $this->helper('get-table-info')($table);
     
     foreach($tableInfo as $column) {
@@ -15,11 +15,11 @@ return function($table) {
             $query[$name] = $settings;
             continue;
         }
-        $data[$name] = $settings;
+        $body[$name] = $settings;
     }
 
     return (Object)[
         "query" => $query,
-        "body" => $data
+        "body" => $body
     ];
 };

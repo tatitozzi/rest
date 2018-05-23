@@ -11,7 +11,7 @@ class Rest {
 
     protected $action;
     protected $method;
-    protected $data;
+    protected $body;
     protected $query;
     protected $actionInfo;
     protected $validatorsLoaded;
@@ -30,19 +30,22 @@ class Rest {
             $this->parseMethod();
             $this->parseAction();
             $this->parseQuery();
-            $this->parseData();
+            $this->parseBody();
             $this->handlerHelperValidators();
             $this->pdo();
             $this->loadAction();
             $this->checkQuery();
-            $this->checkData();
+            $this->checkBody();
             $this->executeCallback();
         } catch(\Exception $ex) {
+            header("Content-Type: application/json");
             http_response_code($ex->getCode());
             echo json_encode([
-                'error' => $ex->getCode(),
-                'message' => $ex->getMessage(),
+                'error' => [
+                    'code' => '... to do ... create a internal error code ...',
+                    'message' => $ex->getMessage(),
                 // 'stackTrace' => $ex->getTraceAsString()
+                ]
             ]);
         }
     }
@@ -51,7 +54,7 @@ class Rest {
         $this->handlersProxy = [
             "action" => &$this->actionInfo,
             "query"  => &$this->query,
-            "data"   => &$this->data,
+            "body"   => &$this->body,
             "pdo"    => &$this->pdo,
         ];
         $this->handlerHelperValidators = new HandlerHelpersValidators($this->config, $this->handlersProxy);
@@ -78,6 +81,9 @@ class Rest {
             return;
 
         $callback = $this->action['callback']->bindTo($this->handlerHelperValidators);
+
+        header("Content-Type: application/json");
+        http_response_code(200);
         echo json_encode($callback());
     }
 
@@ -92,7 +98,7 @@ class Rest {
             throw new \Exception("Action not defined.", 400);
 
         if (!file_exists($file = $this->config['folder']['action'].Self::PS.$this->actionInfo['name'].".php")) 
-            if (!file_exists($file = $this->config['folder']['action'].Self::PS.$this->config['automator']['default'].".php")) 
+            if (!file_exists($file = $this->config['folder']['action'].Self::PS.$this->config['action']['default'].".php")) 
                 throw new \Exception("Action `{$this->actionInfo['name']}` not found.", 404);
         
         $this->action = \Closure::bind(function() use ($file) {
@@ -153,18 +159,19 @@ class Rest {
         $this->query = $this->checkParameters($this->action['query'], $this->query);
     }
 
-    protected function checkData() {
+    protected function checkBody() {
         if ($this->method == 'get')
             return;
 
         if (!isset($this->action['body']))
             return;
         
-        $this->data = $this->checkParameters($this->action['body'], $this->data);
+        $this->body = $this->checkParameters($this->action['body'], $this->body);
     }
     
     protected function parseAction() {
-        $pices = explode("/", $_SERVER['PHP_SELF']);
+        $path = parse_url($_SERVER['REQUEST_URI'])['path'];
+        $pices = explode("/", $path);
         array_shift($pices);
         $this->actionInfo = [
             "name" => array_shift($pices),
@@ -180,7 +187,7 @@ class Rest {
         parse_str($_SERVER['QUERY_STRING'] ?? '', $this->query);
     }
 
-    protected function parseData() {
-        $this->data = json_decode( file_get_contents('php://input'), true );
+    protected function parseBody() {
+        $this->body = json_decode( file_get_contents('php://input'), true );
     }
 };

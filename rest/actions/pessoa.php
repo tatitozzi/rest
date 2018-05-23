@@ -21,7 +21,7 @@ return [
         ],
         'callback' => function() {
             $id = $this->helper('default-insert')('pessoa');
-            return "`{$this->data['nome']}` inserido com sucesso, com o id: $id";
+            return "`{$this->body['nome']}` inserido com sucesso, com o id: $id";
         }
     ],
 

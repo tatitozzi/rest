@@ -3,7 +3,7 @@
 return function() {
     $keys=[];
     $data=[];
-    foreach($this->data as $key => $value) {
+    foreach($this->body as $key => $value) {
         if (!$value) continue;
         $keys[] = "$key=:$key";
         $data[$key] = $value;
