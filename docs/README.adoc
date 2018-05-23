@@ -20,7 +20,7 @@ toc::[]
 - permitir outros tipos de retorno além do JSON (XML)
 
 == Fluxo das Requisições e respostas
-
+[line-height=1.3em]
 ....
                                    ┌─────────────┐                         ┌──────────────┐
    ┌─────────┐                     │ SERVIDOR DE │                         │ SERVIDOR DE  │
@@ -58,7 +58,6 @@ toc::[]
         │<────────────┤ HTTP RESPONSE ├──┤                                       │	
         │                                │                                       │	
         │                                │                                       │	
- 
 ....
 
 - 1. O cliente faz uma requisição HTTP para a aplicação seguindo o seguinte padrão:
