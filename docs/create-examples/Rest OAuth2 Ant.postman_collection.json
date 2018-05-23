@@ -1,0 +1,221 @@
+{
+	"info": {
+		"_postman_id": "fd285e39-7d24-4eda-ac7b-e7a670d8a87d",
+		"name": "Rest OAuth2 Ant",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "localhost/table",
+			"request": {
+				"method": "OPTIONS",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\"     : \"Daniel\",\n\t\"phone\"    : \"44955557777\",\n\t\"email\"    : \"daniel.varela@ifc.edu.br\",\n\t\"nickname\" : \"Drache Havoc\"\n}"
+				},
+				"url": {
+					"raw": "localhost/table",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"table"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost/table",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\"     : \"Daniel\",\n\t\"phone\"    : \"44955557777\",\n\t\"email\"    : \"daniel.varela@ifc.edu.br\",\n\t\"nickname\" : \"Drache Havoc\"\n}"
+				},
+				"url": {
+					"raw": "localhost/table",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"table"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost/table",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\"     : \"Daniel*\",\n\t\"phone\"    : \"44955557777\",\n\t\"email\"    : \"daniel.varela@ifc.edu.br\",\n\t\"nickname\" : \"Drache Havoc\"\n}"
+				},
+				"url": {
+					"raw": "localhost/table?id=1",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"table"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost/table",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost/table",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"table"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost/table?id=1",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost/table?id=1",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"table"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost/table?p=1&r=3",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost/table?p=1&r=3",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"table"
+					],
+					"query": [
+						{
+							"key": "p",
+							"value": "1"
+						},
+						{
+							"key": "r",
+							"value": "3"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost/table?id=1",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost/table?id=1",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"table"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "bb9d07fa-3674-41d5-b7ce-477b80c8a41a",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "337af179-b071-4f66-a46f-b489bd1f61ba",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

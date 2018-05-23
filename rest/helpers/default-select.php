@@ -7,7 +7,7 @@ return function($table, $page, $rows) {
     $page = abs($page-1) * $rows;
     $q = $this->helper('sql-fomart-where')();
     $where = $q->keys ? " WHERE {$q->keys} " : " ";
-    $sql  = "SELECT * FROM {$table}{$where}LIMIT {$page},{$rows}";
+    $sql  = "SELECT * FROM `{$table}`{$where}LIMIT {$page},{$rows}";
     try {
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute($q->values);

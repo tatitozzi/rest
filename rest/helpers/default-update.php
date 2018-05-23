@@ -3,7 +3,7 @@
 return function($table) {
     $data   = $this->helper('sql-update-fomart')();
     $query  = $this->helper('sql-fomart-where')();
-    $sql    = "UPDATE {$table} SET {$data->keys} WHERE {$query->keys}";
+    $sql    = "UPDATE `{$table}` SET {$data->keys} WHERE {$query->keys}";
     $values = array_merge($data->values, $query->values);
     
     try {

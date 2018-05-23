@@ -11,15 +11,13 @@
 
 toc::[]
 
-== Conveções de Termos
+== TO-DO
 
-=== query-string
-
-(..)
-
-=== body-content
-
-(..)
+- Exception customizado capaz de retornar httStatusCode e errorCode
+- helper/get-table-info precisa criar cache das tabelas já pesquisadas
+- implementar OAuth2
+- implementar o método HTTP options
+- permitir outros tipos de retorno além do JSON (XML)
 
 == Fluxo das Requisições e respostas
 
@@ -107,6 +105,6 @@ Automators por padrão são armazenados na pasta `./automators`, porém é poss�
 
 ...
 
-== OAth2
+== OAuth2
 
 ...

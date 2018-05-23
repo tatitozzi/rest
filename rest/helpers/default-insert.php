@@ -2,7 +2,7 @@
 
 return function($table) {
     $data = $this->helper('sql-insert-fomart')();
-    $sql  = "INSERT INTO {$table}({$data->keys}) VALUES ({$data->keysValues})";
+    $sql  = "INSERT INTO `{$table}`({$data->keys}) VALUES ({$data->keysValues})";
     
     try {
         $stmt = $this->pdo->prepare($sql);

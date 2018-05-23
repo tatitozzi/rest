@@ -8,7 +8,7 @@ return [
     ],
 
     'pdo' => [
-        'dsn' => 'mysql:host=localhost;dbname=ia16b',
+        'dsn' => 'mysql:host=localhost;dbname=restoauth2ant-example-database',
         'username' => 'root',
         'password' => '',
     ],
