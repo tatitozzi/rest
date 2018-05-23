@@ -13,11 +13,11 @@ toc::[]
 
 == TO-DO
 
-- Exception customizado capaz de retornar httStatusCode e errorCode
-- helper/get-table-info precisa criar cache das tabelas já pesquisadas
-- implementar OAuth2
-- implementar o método HTTP options
-- permitir outros tipos de retorno além do JSON (XML)
+- ✓ Exception customizado capaz de retornar httStatusCode e errorCode
+- ✗ helper/get-table-info precisa criar cache das tabelas já pesquisadas
+- ✗ implementar OAuth2
+- ✗ implementar o método HTTP options
+- ✗ permitir outros tipos de retorno além do JSON (XML)
 
 == Fluxo das Requisições e respostas
 
@@ -51,7 +51,7 @@ toc::[]
         │                                │     │ ↳ checkQuery()            │     │	
         │                                │     │ ↳ checkBody()             │     │	
         │                                │     │ executeCallback()         │     │	
-        │                                │<────┤ trata o retorno()         │     │	
+        │                                │<────┤ response()                │     │	
         │                                │     └───────────────────────────┘     │	
         │                                │                                       │	
         │                                │                                       │	
