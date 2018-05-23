@@ -106,9 +106,9 @@ São arquivos que retornam funções que podem facilitar tarefas comuns da apica
 
 A variavel `$this` dentro de uma funcão `helper` tem o contexto `HandlerHelpersValidators` e pode ser acessada em qualquer outro contexo, utilizando a seguinte sintaxe:
 
-....
+```php
 $this->helper(nome_do_helper)(... parametros);
-....
+```
 
 Helpers por padrão são armazenados na pasta `./helpers`, porém é possível configurar este local no arquivo `config.php`, através da entrada `folder -> helper`.
 
