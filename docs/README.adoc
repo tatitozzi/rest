@@ -22,6 +22,9 @@ toc::[]
 == Fluxo das Requisições e respostas
 
 .... 
+╲ ╱
+ ╳
+
                                    ┌─────────────┐                         ┌──────────────┐
    ┌─────────┐                     │ SERVIDOR DE │                         │ SERVIDOR DE  │
    │ CLIENTE │                     │  APLICAÇÃO  │                         │ AUTENTICAÇÃO │
@@ -58,6 +61,7 @@ toc::[]
         │<────────────┤ HTTP RESPONSE ├──┤                                       │	
         │                                │                                       │	
         │                                │                                       │	
+        ┴
 ....
 
 - 1. O cliente faz uma requisição HTTP para a aplicação seguindo o seguinte padrão:
