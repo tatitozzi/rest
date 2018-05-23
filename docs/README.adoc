@@ -11,6 +11,41 @@
 
 toc::[]
 
+== Conveções de Termos
+
+=== query-string
+
+(..)
+
+=== body-content
+
+(..)
+
+== Fluxo das Requisições e respostas
+
+- 1. O cliente faz uma requisição HTTP para a aplicação seguindo o seguinte padrão:
+    * A URL de acesso deve seguir o seguinte padrão http(s)://dominio_da_aplicaçao/nome_do_action/...path?query_string
+        ** nome_do_action (..)
+        ** ...path (..)
+        ** query_string deve seguir o seguinte padrão ?chave1=valor1&chave2=valor2&chaveN=valorN
+    * Informar o METHOD como get, put, post ou delete.
+    * O corpo da requisição deve conter um JSON válido.
+- 2. A aplicação recebe a requisição HTTP e faz os sguintes processos:
+    * 01 loadConfig()                      : carrega o arquivo de configuração
+    * 02 parseMethod()                     : higieniza o nome do método com o qual a aplicação foi requisitada (get, put, post, delete).
+    * 03 parseAction()                     : transforma o valores da URL (nome_do_action/...path), em um array no seguinte padrão: `[ "path" => nome_do_action, path => ...path ]`
+    * 04 parseQuery()                      : transforma a `query_string` em um array
+    * 05 parseData()                       : transforma o corpo da reuisição em um array
+    * 06 handlerHelperValidators()         : 
+    * 07 pdo()                             : conecta-se ao banco de dados
+    * 08 loadAction()                      : carrega o arquivo de action conforme a chave `name` gerada no passo `03` e nome do método da requisição HTTP higienizado no passo `02`
+    * 09 checkQuery()                      : checa e formata os valores carregados no passo `02` com as informações contidas no arquivo `action` carregado pelo passo `08`
+    * 10 checkData()                       : checa e formata os valores carregados no passo `03` com as informações contidas no arquivo `action` carregado pelo passo `08`
+    * 11 executeCallback()                 : executa o callback 
+    * 12 `try` go() `catch` trata resposta : trata os erros e responde a requisição HTTP o resultado obtido no passo `11` de volta ao cliente
+
+(..)
+
 == Configurações
 
 As configurações são feitas no arquivo `config.php` (..)
