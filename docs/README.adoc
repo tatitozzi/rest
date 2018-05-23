@@ -20,6 +20,29 @@ toc::[]
 - permitir outros tipos de retorno além do JSON (XML)
 
 == Fluxo das Requisições e respostas
+┌   
+│ asdasdas
+┊	
+....
+┌   
+│ asdasdas
+┊	
++-------+                                                                                   +-------+
+|       |      +-----+-----------------------------------------+                            |       |
+|   C   | ---( | url | http://domain/action-name/?query-string | ) ->                       |   A   |
+|   L   |      +-----+-----------------------------------------+                            |   P   |
+|   I   |                                                                                   |   P   |
+|   E   |                                                                                   |   L   |
+|   N   |                                                                                   |   I   |
+|   T   |                                                                                   |   C   |
+|       |                                                                                   |   A   |
+|       |                                                                                   |   T   |
+|       |                                                                                   |   I   |
+|       |                                                                                   |   O   |
+|       | <-------------( HTTP response )---                                                |   N   |
+|       |                                                                                   |       |
++-------+                                                                                   +-------+
+....
 
 - 1. O cliente faz uma requisição HTTP para a aplicação seguindo o seguinte padrão:
     * A URL de acesso deve seguir o seguinte padrão http(s)://dominio_da_aplicaçao/nome_do_action/...path?query_string
