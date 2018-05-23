@@ -21,10 +21,6 @@ toc::[]
 
 == Fluxo das Requisições e respostas
 
-[.console]
-asdasd
-
-<div class="fuuuk">
 .... 
                                    ┌─────────────┐                         ┌──────────────┐
    ┌─────────┐                     │ SERVIDOR DE │                         │ SERVIDOR DE  │
@@ -63,7 +59,6 @@ asdasd
         │                                │                                       │	
         │                                │                                       │	
 ....
-</div>
 
 - 1. O cliente faz uma requisição HTTP para a aplicação seguindo o seguinte padrão:
     * A URL de acesso deve seguir o seguinte padrão http(s)://dominio_da_aplicaçao/nome_do_action/...path?query_string
