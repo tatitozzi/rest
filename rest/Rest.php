@@ -19,6 +19,7 @@ class Rest {
     protected $handler;
     protected $handlersProxy;
     protected $config;
+    protected $response;
 
     function __construct() {
         $this->go();   
@@ -27,26 +28,38 @@ class Rest {
     protected function go() {
         try {
             $this->loadConfig();
-            $this->parseMethod();
-            $this->parseAction();
-            $this->parseQuery();
-            $this->parseBody();
+            $this->parse();
             $this->handlerHelperValidators();
             $this->pdo();
             $this->loadAction();
-            $this->checkQuery();
-            $this->checkBody();
+            $this->check();
             $this->executeCallback();
-        } catch(\Exception $ex) {
-            header("Content-Type: application/json");
-            http_response_code($ex->getCode());
-            $response = ['error'=>[]];
-            $response['error']['code'] = '... make a custom Exception to trace intercar erros code, not just http status ...';
-            $response['error']['message'] = $ex->getMessage();
-            if ($this->config['system']['error']['trace']) 
-                $response['error']['trace'] = $ex->getTrace();
-            echo json_encode($response);
+            $this->response();
+        } catch(RestException $ex) {
+            $this->responseError($ex);
         }
+    }
+
+    protected function response() {
+        header("Content-Type: application/json");
+        http_response_code(200);
+        echo json_encode($this->response);
+    }
+
+    protected function responseError(RestException $ex) {
+        header("Content-Type: application/json");
+        http_response_code($ex->getHttpStatusCode());
+        $response = [
+            'error' => [
+                'code' => $ex->getCustomCode(),
+                'message' => $ex->getMessage(),
+            ]
+        ];
+
+        if ($this->config['system']['error']['trace']) 
+            $response['error']['trace'] = $ex->getTrace();
+
+        echo json_encode($response);
     }
 
     protected function handlerHelperValidators() {
@@ -64,14 +77,17 @@ class Rest {
             $this->pdo = new \PDO(
                 $this->config['pdo']['dsn'], 
                 $this->config['pdo']['username'], 
-                $this->config['pdo']['password'], 
-                [
+                $this->config['pdo']['password'], [
                     \PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8',
                     \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION
                 ]
             );
         } catch(\PDOException  $ex) {
-            throw new \Exception('Erro ao connectarse ao banco de dados: '. $ex->getMessage(), 500   );
+            throw new RestException(
+                'Erro ao connectarse ao banco de dados: '. $ex->getMessage(),
+                $ex->getCustomCode(), 
+                500
+            );
         }
     }
 
@@ -80,10 +96,7 @@ class Rest {
             return;
 
         $callback = $this->action['callback']->bindTo($this->handlerHelperValidators);
-
-        header("Content-Type: application/json");
-        http_response_code(200);
-        echo json_encode($callback());
+        $this->response = $callback();
     }
 
     protected function loadConfig() {
@@ -94,18 +107,26 @@ class Rest {
 
     protected function loadAction() {
         if (empty($this->actionInfo['name']))
-            throw new \Exception("Action not defined.", 400);
+            throw new RestException("Action not defined.", 0000, 400);
 
         if (!file_exists($file = $this->config['folder']['action'].Self::PS.$this->actionInfo['name'].".php")) 
             if (!file_exists($file = $this->config['folder']['action'].Self::PS.$this->config['action']['default'].".php")) 
-                throw new \Exception("Action `{$this->actionInfo['name']}` not found.", 404);
+                throw new RestException(
+                    "Action `{$this->actionInfo['name']}` not found.", 
+                    0000, 
+                    404
+                );
         
         $this->action = \Closure::bind(function() use ($file) {
             return require $file;
         }, new HandlerActions($this->config, $this->handlersProxy))();
         
         if ( !isset($this->action[$this->method]) )
-            throw new \Exception("Method `{$this->method}` not implemented in action `{$this->actionInfo['name']}`.", 501);
+            throw new RestException(
+                "Method `{$this->method}` not implemented in action `{$this->actionInfo['name']}`.", 
+                0000, 
+                501
+            );
         
         $this->action = $this->action[$this->method];
     }
@@ -117,7 +138,16 @@ class Rest {
         if (file_exists($file = $this->config['folder']['validator'].Self::PS.$validatorName.".php"))
             return $this->validatorsLoaded[$validatorName] = (require $file)->bindTo($this->handlerHelperValidators);            
         
-        throw new \Exception("Validor `{$validatorName}` not found.", 500);
+        throw new RestException(
+            "Validor `{$validatorName}` not found.", 
+            0000, 
+            500
+        );
+    }
+
+    protected function check() {
+        $this->checkQuery();
+        $this->checkBody();
     }
 
     protected function checkParameters(Array $parameters, Array $data) {
@@ -146,7 +176,11 @@ class Rest {
         }
 
         if(!empty($errors))
-            throw new \Exception(implode("\r\n", $errors), 400);
+            throw new RestException(
+                implode("\r\n", $errors), 
+                'A100', 
+                400
+            );
 
         return $formedData;
     }
@@ -160,14 +194,21 @@ class Rest {
 
     protected function checkBody() {
         if ($this->method == 'get')
-            return;
-
+        return;
+        
         if (!isset($this->action['body']))
-            return;
+        return;
         
         $this->body = $this->checkParameters($this->action['body'], $this->body);
     }
     
+    protected function parse() {
+        $this->parseMethod();
+        $this->parseAction();
+        $this->parseQuery();
+        $this->parseBody();
+    }
+
     protected function parseAction() {
         $path = parse_url($_SERVER['REQUEST_URI'])['path'];
         $pices = explode("/", $path);

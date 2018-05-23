@@ -12,6 +12,10 @@ class HandlerActions extends HandlerHelpersValidators {
         if (file_exists($file = $this->config['folder']['automator'].Self::PS.$automatorName.".php")) 
             return $this->automaatorsLoaded[$automatorName] = require $file;            
         
-        throw new \Exception("Automator `{$automatorName}` not found.", 500);
+        throw new \rest\RestException(
+            "Automator `{$automatorName}` not found.", 
+            0000, 
+            500
+        );
     }
 }

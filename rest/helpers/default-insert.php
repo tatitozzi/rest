@@ -9,6 +9,10 @@ return function($table) {
         $stmt->execute($data->values);
         return $this->pdo->lastInsertId();
     } catch(PDOException $ex) {
-        throw new Exception('Erro ao executar inserção: ' . $ex->getMessage(), 500);
+        throw new \rest\RestException(
+            'Erro ao executar inserção: ' . $ex->getMessage(), 
+            $ex->getCode(),
+            500
+        );
     }
 };
