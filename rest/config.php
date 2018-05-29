@@ -17,12 +17,11 @@ return [
         'default' => '__default',
     ],
 
-    'folder' =>
-    [
-        'action' => Self::DIR . 'actions',
-        'validator' => Self::DIR . 'validators',
-        'helper' => Self::DIR . 'helpers',
-        'automator' => Self::DIR . 'automators',
-        'cache' => Self::DIR . 'cache',
+    'folder' => [
+        'action' => $DIR . 'actions',
+        'validator' => $DIR . 'validators',
+        'helper' => $DIR . 'helpers',
+        'automator' => $DIR . 'automators',
+        'cache' => $DIR . 'cache',
     ],
 ];

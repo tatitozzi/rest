@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            padding: 0;
+            margin: 0;
+        }
+
+        body {
+            height: 100vh;
+            width: 100vw;
+            display: flex;
+            justify-content: center;
+            align-items: center
+        }
+    </style>
+</head>
+
+<body>
+    <span>--- {{variavel}} ---</span>a
+    <div class="pessoa" view-repeat="pessoas" view-repeat-as="p">
+        <div class="dados">
+            <span>{{p.nome}} - {{p.apelido}}</span>
+        </div>
+        <div class="filhos">
+            <span view-repeat="p.filhos" view-repeat-as="f">{{f.nome}} {{f.idade}}</span>
+        </div>
+        <div class="telefones">
+            <span view-repeat="p.telefones" view-repeat-as="t">{{t}}</span>
+        </div>
+    </div>
+
+    <!-- 
+        <div class="login">
+            <form method="POST">
+                <input name="user">
+                <input name="pass">
+                <label class="scope" view-repeat="SCOPES">
+                    <input type="checkbox">
+                    <span></span>
+                </label>
+                <button>vai</button>
+            </form>
+        </div>
+    -->
+</body>
+
+</html>

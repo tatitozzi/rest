@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        .pessoa {
+            padding-bottom: 10px;
+            margin-bottom: 10px;
+            border-bottom: 2px solid red;
+            display: flex;
+        }
+
+        .pessoa h2 {
+            padding: 0;
+            margin: 0;
+        }
+
+        .pessoa > * {
+            width: 33.33333%;
+            padding: 10px;
+            border: 1px solid;
+            border-right: 0 none
+        }
+
+        .pessoa > *:last-child {
+            border-right: 1px solid;
+        }
+
+        .pessoa span {
+            border-radius: 5px;
+            display: inline-block;
+            padding: 2px 5px;
+            background-color: rgba(0,0,0,.3)
+        }
+    </style>
+</head>
+
+<body>
+    <span data-custom="{{variavel}}">--- {{variavel}} ---</span>a
+    <div class="pessoa" view-repeat="pessoas" view-repeat-as="p">
+        <div class="dados pessoa-{{p.nome}}">
+            <h2>Dados Pessoa</h2>
+            <span>{{p.nome}} - {{p.apelido}}</span>
+        </div>
+        <div class="filhos">
+            <h2>Filhos</h2>
+            <span view-repeat="p.filhos" view-repeat-as="f">{{f.nome}} {{f.idade}}</span>
+        </div>
+        <div class="telefones">
+            <h2>Telefones</h2>
+            <span view-repeat="p.telefones" view-repeat-as="t">{{t}}</span>
+        </div>
+    </div>
+</body>
+
+</html>

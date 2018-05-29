@@ -5,7 +5,7 @@
 
 namespace rest;
 
-class Rest {
+class Rest extends \base\Main {
     const PS = DIRECTORY_SEPARATOR;
     const DIR = __DIR__ . Self::PS;
 
@@ -13,21 +13,19 @@ class Rest {
     protected $method;
     protected $body;
     protected $query;
-    protected $actionInfo;
     protected $validatorsLoaded;
-    protected $pdo;
     protected $handler;
     protected $handlersProxy;
-    protected $config;
     protected $response;
 
     function __construct() {
+        Parent::__construct();
         $this->go();   
     }
 
     protected function go() {
         try {
-            $this->loadConfig();
+            $this->loadConfig($this);
             $this->parse();
             $this->handlerHelperValidators();
             $this->pdo();
@@ -72,37 +70,12 @@ class Rest {
         $this->handlerHelperValidators = new HandlerHelpersValidators($this->config, $this->handlersProxy);
     }
 
-    protected function pdo() {
-        try {
-            $this->pdo = new \PDO(
-                $this->config['pdo']['dsn'], 
-                $this->config['pdo']['username'], 
-                $this->config['pdo']['password'], [
-                    \PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8',
-                    \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION
-                ]
-            );
-        } catch(\PDOException  $ex) {
-            throw new RestException(
-                'Erro ao connectarse ao banco de dados: '. $ex->getMessage(),
-                $ex->getCustomCode(), 
-                500
-            );
-        }
-    }
-
     protected function executeCallback() {
         if (!isset($this->action['callback']))
             return;
 
         $callback = $this->action['callback']->bindTo($this->handlerHelperValidators);
         $this->response = $callback();
-    }
-
-    protected function loadConfig() {
-        $this->config = \Closure::bind(function() {
-            return require Self::DIR . "config.php";
-        }, new \stdClass)();
     }
 
     protected function loadAction() {
@@ -204,19 +177,9 @@ class Rest {
     
     protected function parse() {
         $this->parseMethod();
-        $this->parseAction();
+        $this->parseActionInfo();
         $this->parseQuery();
         $this->parseBody();
-    }
-
-    protected function parseAction() {
-        $path = parse_url($_SERVER['REQUEST_URI'])['path'];
-        $pices = explode("/", $path);
-        array_shift($pices);
-        $this->actionInfo = [
-            "name" => array_shift($pices),
-            "path" => $pices
-        ];
     }
 
     protected function parseMethod() {

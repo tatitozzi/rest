@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body>
+    <script src='ClientOauth2.js'></script>
+    <script>
+        let roa = new OAuth2.Client(
+            'restaurante', {
+                id: '331993973993790'
+            }, {
+                api: 'http://localhost/',
+                auth: 'http://localhost/oauth.php/authorize',
+                redirect: 'http://localhost',
+            }, [
+                // https://developers.facebook.com/docs/facebook-login/permissions/v3.0
+                'public_profile',
+                'email'
+            ]
+        )
+
+    </script>
+</body>
+
+</html>
