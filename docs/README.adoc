@@ -16,6 +16,12 @@ toc::[]
 - ✓ Exception customizado capaz de retornar httStatusCode e errorCode
 - ✓ refatorar todos os namespaces para letras camelcase
 - ✗ implementar OAuth2
+  - Authorization Code
+  - Implicit
+  - Password
+  - Client Credentials
+  - Device Code
+  - Refresh Token
 - ✗ implementar recuperação de senha OAuth2
 - ✗ Alterar os contextos do Rest.php para o novo Base\Context
 - ✗ helper/get-table-info precisa criar cache das tabelas já pesquisadas para poder funcionar em ambientes em que o sistema não tenha acesso ao informtion_schema
