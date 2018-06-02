@@ -1,6 +1,6 @@
 <?php
 
-namespace rest;
+namespace Rest;
 
 class Handler {
     const PS = DIRECTORY_SEPARATOR;

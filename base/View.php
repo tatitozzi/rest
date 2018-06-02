@@ -1,8 +1,8 @@
 <?php
 
-namespace base;
+namespace Base;
 
-class View extends \base\Main {
+class View extends \Base\Main {
     protected $html = 'not found';
     protected $find;
     

@@ -9,7 +9,7 @@ return function($table) {
         $stmt->execute($query->values);
         return $stmt->rowCount();
     } catch(PDOException $ex) {
-        throw new \rest\RestException(
+        throw new \Rest\RestException(
             'Erro ao executar exclusão: ' . $ex->getMessage(), 
             $ex->getCode(),
             500

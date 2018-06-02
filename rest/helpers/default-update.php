@@ -11,7 +11,7 @@ return function($table) {
         $stmt->execute($values);
         return $stmt->rowCount();
     } catch(PDOException $ex) {
-        throw new \rest\RestException(
+        throw new \Rest\RestException(
             'Erro ao executar atualização: ' . $ex->getMessage(), 
             $ex->getCode(),
             500

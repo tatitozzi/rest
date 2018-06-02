@@ -1,6 +1,6 @@
 <?php
 
-namespace rest;
+namespace Rest;
 
 class HandlerActions extends HandlerHelpersValidators {
     protected $automaatorsLoaded;
@@ -12,7 +12,7 @@ class HandlerActions extends HandlerHelpersValidators {
         if (file_exists($file = $this->config['folder']['automator'].Self::PS.$automatorName.".php")) 
             return $this->automaatorsLoaded[$automatorName] = require $file;            
         
-        throw new \rest\RestException(
+        throw new \Rest\RestException(
             "Automator `{$automatorName}` not found.", 
             0000, 
             500

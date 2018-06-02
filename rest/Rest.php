@@ -3,9 +3,10 @@
 // http://www.restapitutorial.com/httpstatuscodes.html
 // http://blog.caelum.com.br/rest-principios-e-boas-praticas/
 
-namespace rest;
+namespace Rest;
 
-class Rest extends \base\Main {
+
+class Rest extends \Base\Main {
     const PS = DIRECTORY_SEPARATOR;
     const DIR = __DIR__ . Self::PS;
 
@@ -42,7 +43,7 @@ class Rest extends \base\Main {
         try {
             parent::pdo();
         } catch(\PDOException  $ex) {
-            throw new \rest\RestException(
+            throw new \Rest\RestException(
                 'Erro ao connectarse ao banco de dados: '. $ex->getMessage(),
                 $ex->getCode(), 
                 500

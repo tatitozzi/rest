@@ -14,10 +14,10 @@ toc::[]
 == TO-DO
 
 - ✓ Exception customizado capaz de retornar httStatusCode e errorCode
-- ✗ refatorar todos os namespaces para letras maiusculas
+- ✓ refatorar todos os namespaces para letras camelcase
 - ✗ implementar OAuth2
 - ✗ implementar recuperação de senha OAuth2
-- ✗ Alterar os contextos do Rest.php para o novo base\Context
+- ✗ Alterar os contextos do Rest.php para o novo Base\Context
 - ✗ helper/get-table-info precisa criar cache das tabelas já pesquisadas para poder funcionar em ambientes em que o sistema não tenha acesso ao informtion_schema
 - ✗ implementar o método HTTP options
 - ✗ permitir outros tipos de retorno além do JSON (XML)

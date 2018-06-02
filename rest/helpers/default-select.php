@@ -13,7 +13,7 @@ return function($table, $page, $rows) {
         $stmt->execute($q->values);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     } catch(PDOException $ex) {
-        throw new \rest\RestException(
+        throw new \Rest\RestException(
             'Erro ao executar busca: ' . $ex->getMessage(), 
             $ex->getCode(),
             500

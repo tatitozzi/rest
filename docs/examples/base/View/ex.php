@@ -2,7 +2,7 @@
 
 include __DIR__ . "/../../../../autoloader.inc.php";
 
-$view = new \base\View(__DIR__ . "/ex.html");
+$view = new \Base\View(__DIR__ . "/ex.html");
 $view->variavel = 'oiiieeee deu certo manolo';
 $view->pessoasA = [];
 $view->pessoas = [

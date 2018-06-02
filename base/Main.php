@@ -1,6 +1,6 @@
 <?php
 
-namespace base;
+namespace Base;
 
 class Main {
     const DIR = 'adicione const DIR na class que estende base\main';

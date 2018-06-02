@@ -98,14 +98,47 @@ return [
             ]);
 
             return [
-                "code" => $code
+                "href" => "{$queryArr['redirect_uri']}?code=$code"
             ];
         },
     ],
         
-    // TOKEN
-    'token' => [    
-        // GENERATE TOKEN HASH
-        'register' => function() {}
+    // TOKEN // GENERATE TOKEN HASH
+    'token' => [
+        
+        'authorization_code' => function($queryArr) { 
+            // https://www.oauth.com/oauth2-servers/access-tokens/refreshing-access-tokens/
+            
+            // client_id
+            // client_secret
+            // redirect_uri
+            // grant_type => authorization_code
+            // code
+            
+            $hashData = $this->pdo->prepare('SELECT * FROM hash WHERE `code`=? LIMIT 1');
+            $hashData->execute([$queryArr['code']]);
+            $hashData = $hashData->fetch(\PDO::FETCH_ASSOC);
+
+            if (!$hashData['code'])
+                die('tratar erro rest caso code não seja encontrado');
+
+            if ($hashData['redirect_uri'] !== $queryArr['redirect_uri'])
+                die('tratar erro rest caso redirect_uri não seja compativel com os valores salvos no banco');
+
+            if ($hashData['client_id'] !== $queryArr['client_id'])
+                die('tratar erro rest caso client_id não seja compativel com os valores salvos no banco');
+
+            if ($hashData['client_secret'] !== $queryArr['client_secret'])
+                die('tratar erro rest caso client_secret não seja compativel com os valores salvos no banco');
+                
+            print_r($hashData);
+
+            // {
+            //     "access_token": "EAAEt8l7jMT4BAKYG66knpHo3yC31H2vbo9FucS1DvMcUtzUOZCsbrbCuXnGRHjc8wZCz8bbSDEPemYxKpWZAVwsWwrCtZABea7TE29N5oaKcrsO77xOGhwYrLeT2w40IcARpZACHB9KQXelm72TxmgYHwujzIgBMmUoKyIKZCGQb9SbRC92qvE",
+            //     "token_type": "bearer",
+            //     "expires_in": 5183962
+            // }
+            return "faz o toke aqui";
+        }
     ]
 ];

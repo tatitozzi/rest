@@ -1,6 +1,6 @@
 <?php
 
-namespace rest;
+namespace Rest;
 
 class RestException extends \Exception {
     protected $customCode;

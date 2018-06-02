@@ -1,4 +1,4 @@
 <?php
 
 require __DIR__ . '/autoloader.inc.php';
-return new \rest\Rest();
+return new \Rest\Rest();

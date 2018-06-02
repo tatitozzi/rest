@@ -288,8 +288,7 @@
             stopLoadAnimation()
             let res = await req.json()
             let search = new URLSearchParams(location.search)
-            // location.href = search.get('redirect_uri') + "?code=" + res.code 
-            console.log(res)
+            location.href = res.href 
         }
 
         domUser.addEventListener('keydown', ev => (ev.which == 13) ? userCheck() : null)

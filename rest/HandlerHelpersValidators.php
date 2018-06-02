@@ -1,6 +1,6 @@
 <?php
 
-namespace rest;
+namespace Rest;
 
 class HandlerHelpersValidators extends Handler {
     protected $helpersLoaded;
@@ -12,7 +12,7 @@ class HandlerHelpersValidators extends Handler {
         if (file_exists($file = $this->config['folder']['helper'].Self::PS.$helperName.".php")) 
             return $this->helpersLoaded[$helperName] = require $file;            
         
-        throw new \rest\RestException(
+        throw new \Rest\RestException(
             "Helper `{$helperName}` not found.", 
             0000, 
             500
