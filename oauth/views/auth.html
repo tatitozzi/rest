@@ -5,6 +5,39 @@
     <meta charset="UTF-8">
     <title>Document</title>
     <style>
+        @keyframes shake {
+            10%,
+            90% {
+                transform: translate3d(-1px, 0, 0);
+            }
+
+            20%,
+            80% {
+                transform: translate3d(2px, 0, 0);
+            }
+
+            30%,
+            50%,
+            70% {
+                transform: translate3d(-4px, 0, 0);
+            }
+
+            40%,
+            60% {
+                transform: translate3d(4px, 0, 0);
+            }
+        }
+
+        @keyframes load {
+            0% {
+                background: green
+            }
+
+            50% {
+                background: red
+            }
+        }
+
         * {
             box-sizing: border-box;
         }
@@ -13,45 +46,261 @@
         body {
             padding: 0;
             margin: 0;
-        }
-
-        body {
             height: 100vh;
             width: 100vw;
             display: flex;
             justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .shake {
+            animation: shake 300ms ease-in-out
+        }
+
+        div.login {
+            width: 450px;
+            height: 500px;
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14),
+            0 3px 1px -2px rgba(0, 0, 0, 0.12),
+            0 1px 5px 0 rgba(0, 0, 0, 0.2)
+        }
+
+        div.login div.container {
+            transition: .3s;
+            display: flex;
+            flex-wrap: nowrap;
+            width: 100%;
+            height: 100%;
+            align-items: flex-end;
+        }
+
+        div.login div.window {
+            width: 100%;
+            height: 98.5%;
+            flex: none;
+            transform: translateX(0%);
+            padding: 1vw;
+            display: flex;
+            flex-direction: column
+        }
+
+        div.login div.window>div.header {
+            height: 15%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-bottom: 1px solid #CCC;
+            margin-bottom: 5px
+        }
+
+        div.login div.window>div.content {
+            height: 60%;
+            overflow: auto;
+        }
+
+        div.login div.window>div.buttons {
+            display: flex;
+            padding: 5px 0;
+        }
+
+        div.login div.window>div.buttons>* {
+            flex-grow: 1
+        }
+
+        div.login div.window>* {
+            flex-grow: 1
+        }
+
+        div.login div.window.scopes label:first-of-type {
+            border-radius: 10px 10px 0 0;
+        }
+
+        div.login div.window.scopes label:last-of-type {
+            border-radius: 0 0 10px 10px;
+        }
+
+        div.login div.window.scopes label {
+            display: block;
+            background: #EDECE7;
+            padding: 10px;
+            border-bottom: 1px solid #CCC;
+            display: flex;
+            align-items: center;
+        }
+
+        div.login div.window.user div.content,
+        div.login div.window.pass div.content {
+            display: flex;
+            justify-content: center;
             align-items: center
+        }
+
+        div.login div.load {
+            width: 100%;
+            height: 1%;
+            position: absolute;
+        }
+
+        div.login div.load.loading {
+            animation: load 1s ease-in-out infinite;
         }
     </style>
 </head>
 
 <body>
-    <span>--- {{variavel}} ---</span>a
-    <div class="pessoa" view-repeat="pessoas" view-repeat-as="p">
-        <div class="dados">
-            <span>{{p.nome}} - {{p.apelido}}</span>
-        </div>
-        <div class="filhos">
-            <span view-repeat="p.filhos" view-repeat-as="f">{{f.nome}} {{f.idade}}</span>
-        </div>
-        <div class="telefones">
-            <span view-repeat="p.telefones" view-repeat-as="t">{{t}}</span>
+    /authorize?client_id=aaa&amp;redirect_uri=http://localhost&amp;scope=aaaa+bbb+ccc+ddd&amp;response_type=code
+    <br/>
+    <br/>
+    <div class="login">
+        <div class="load"></div>
+        <div class="container">
+            <div class="window scopes">
+                <div class="header">
+
+
+                    A aplicação deseja acessar as seguintes informações de sua conta.
+                </div>
+                <div class="content">
+                    <label class="scope" view-repeat="scopes" view-repeat-value="scope" view-repeat-key="key">
+                        <input name="scope" type="checkbox" checked value="{{key}}">
+                        <span>{{scope}}</span>
+                    </label>
+                </div>
+                <div class="buttons">
+                    <button class="first-focus bt-select-scope">vai</button>
+                </div>
+            </div>
+            <div class="window user">
+                <div class="header">
+                    Login
+                </div>
+                <div class="content">
+                    <input class="first-focus" name="user">
+                </div>
+                <div class="buttons">
+                    <button class="bt-back">volta</button>
+                    <button class="bt-check-user">vai</button>
+                </div>
+            </div>
+            <div class="window pass">
+                <div class="header">
+                    Senha
+                </div>
+                <div class="content">
+                    <input class="first-focus" name="pass">
+                </div>
+                <div class="buttons">
+                    <button class="bt-back">volta</button>
+                    <button class="bt-send">vai</button>
+                </div>
+            </div>
         </div>
     </div>
 
-    <!-- 
-        <div class="login">
-            <form method="POST">
-                <input name="user">
-                <input name="pass">
-                <label class="scope" view-repeat="SCOPES">
-                    <input type="checkbox">
-                    <span></span>
-                </label>
-                <button>vai</button>
-            </form>
-        </div>
-    -->
+    <script>
+        let domLoad = document.querySelector('.load')
+        let domLogin = document.querySelector('.login')
+        let domContainer = domLogin.querySelector('.container')
+        let domWindows = document.querySelectorAll('.window')
+        let domCurrentWindow = domWindows[0]
+        let domBtsBack = document.querySelectorAll('.bt-back')
+        let domBtSelectScope = document.querySelector('.bt-select-scope')
+        let domBtCheckUser = document.querySelector('.bt-check-user')
+        let domBtSend = document.querySelector('.bt-send')
+        let domUser = document.querySelector('input[name="user"]')
+        let domPass = document.querySelector('input[name="pass"]')
+        let limit = domWindows.length
+        let userFetchController;
+        let sendFetchController;
+        let current = 1
+
+        const startLoadAnimation = () =>
+            domLoad.classList.add('loading')
+
+        const stopLoadAnimation = () =>
+            domLoad.classList.remove('loading')
+
+        const shake = el => {
+            let ends = () => el.classList.remove('shake')
+            el.removeEventListener('animationend', ends);
+            ends()
+            setTimeout(() => {
+                el.classList.add('shake')
+                el.addEventListener('animationend', ev => {
+                    ends()
+                    el.removeEventListener('animationend', ends);
+                })
+            }, 100)
+        }
+
+        const next = () =>
+            open(++current)
+
+        const prev = () =>
+            open(--current)
+
+        const open = (pos) => {
+            if (pos >= limit)
+                pos = current = limit
+            if (pos <= 1)
+                pos = current = 1
+            domCurrentWindow = domWindows[pos - 1]
+            domContainer.style.transform = `translateX(-${100 * (pos-1)}%)`
+            if (el = domCurrentWindow.querySelector('.first-focus'))
+                el.focus()
+            domLogin.scrollTo(0, 0);
+        }
+
+        const userCheck = async () => {
+            startLoadAnimation()
+            if (userFetchController && !userFetchController.signal.aborted)
+                userFetchController.abort()
+            userFetchController = new AbortController();
+            let signal = userFetchController.signal
+            let req = await fetch('./authorize/perfil/' + domUser.value, {
+                signal
+            });
+            stopLoadAnimation()
+            let res = await req.json()
+            if (res) {
+                next()
+            } else {
+                shake(domCurrentWindow)
+                domUser.focus()
+            }
+        }
+
+        const send = async () => {
+            startLoadAnimation()
+            if (sendFetchController && !sendFetchController.signal.aborted)
+                sendFetchController.abort()
+            sendFetchController = new AbortController();
+            let signal = userFetchController.signal
+            let req = await fetch('./authorize/register/' + domUser.value + location.search, {
+                method: 'POST',
+                body: domPass.value,
+                signal
+            });
+            stopLoadAnimation()
+            let res = await req.json()
+            let search = new URLSearchParams(location.search)
+            // location.href = search.get('redirect_uri') + "?code=" + res.code 
+            console.log(res)
+        }
+
+        domUser.addEventListener('keydown', ev => (ev.which == 13) ? userCheck() : null)
+        domPass.addEventListener('keydown', ev => (ev.which == 13) ? send() : null)
+        domBtSelectScope.addEventListener('click', ev => next())
+        domBtsBack.forEach(bt => bt.addEventListener('click', ev => prev()))
+        domBtCheckUser.addEventListener('click', userCheck)
+        domBtSend.addEventListener('click', send)
+
+        open(0)
+    </script>
 </body>
 
 </html>

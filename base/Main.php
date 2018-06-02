@@ -48,22 +48,15 @@ class Main {
         if ($this->pdo)
             return $this->pdo;
 
-        try {
-            $this->pdo = new \PDO(
-                $this->config['pdo']['dsn'], 
-                $this->config['pdo']['username'], 
-                $this->config['pdo']['password'], [
-                    \PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8',
-                    \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION
-                ]
-            );
-        } catch(\PDOException  $ex) {
-            throw new \rest\RestException(
-                'Erro ao connectarse ao banco de dados: '. $ex->getMessage(),
-                $ex->getCode(), 
-                500
-            );
-        }
+        $this->pdo = new \PDO(
+            $this->config['pdo']['dsn'], 
+            $this->config['pdo']['username'], 
+            $this->config['pdo']['password'], [
+                \PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8',
+                \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION
+            ]
+        );
+        
 
         return $this->pdo;
     }

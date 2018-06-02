@@ -5,57 +5,66 @@ namespace oauth;
 class OAuth2 extends \base\Main {
     const DIR = __DIR__ . DIRECTORY_SEPARATOR;
 
+    private $queryArr;
+
     function __construct() {
-        Parent::__construct();
-        $this->loadConfig(new \base\Context);
+        parent::__construct();
+        parse_str($_SERVER['QUERY_STRING'] ?? '', $this->queryArr);
         $this->parseActionInfo();
+        $this->prepareAndloadConfig();
+        
+        if ($this->actionInfo['name'] == 'authorize'
+            && isset($this->actionInfo['path'][0])
+            && $this->actionInfo['path'][0] == 'perfil'
+            && isset($this->actionInfo['path'][1])
+        ) exit ($this->checkPerfil());
+
+        if ($this->actionInfo['name'] == 'authorize'
+            && isset($this->actionInfo['path'][0])
+            && $this->actionInfo['path'][0] == 'register'
+            && isset($this->actionInfo['path'][1])
+        ) exit ($this->register());
+        
         if ($this->actionInfo['name'] == 'authorize')
-            return $this->showAuthForm();
+            exit($this->showAuthForm());
+    }
+
+    protected function checkParameters() {
+        if (!isset($this->queryArr['client_id']))
+            die ("tratar erro rest caso o client_id não seja informado");
+
+        if (!isset($this->queryArr['redirect_uri']))
+            die ("tratar erro rest caso o redirect_uri não seja informado");
+
+        if (!isset($this->queryArr['scope']))
+            die ("tratar erro rest caso o scope não seja informado");
     }
     
+    protected function prepareAndloadConfig() {
+        $context = new \base\Context();
+        parent::loadConfig($context);
+        $context->pdo = $this->pdo();
+    }
+    
+    protected function checkPerfil() {
+        $username = $this->actionInfo['path'][1] ?? "me";
+        $function = $this->config['auth']['code']['check']['user'];
+        $result = $function($username);
+        return json_encode($result);
+    }
+
+    protected function register() {
+        $username = $this->actionInfo['path'][1];
+        $password = file_get_contents('php://input');
+        $function = $this->config['auth']['code']['register'];
+        $result = $function($username, $password, $this->queryArr);
+        return json_encode($result);
+    }
+
     protected function showAuthForm() {
+        $this->checkParameters();
         $view = new \base\View("{$this->config['folder']['view']}/auth.html");
-        $view->variavel = 'oiiieeee deu certo manolo';
-        $view->pessoasA = [];
-        $view->pessoas = [
-            [
-                'nome' => 'daniel',
-                'apelido' => 'Drache',
-                'filhos' => [
-                    ['idade' => 5, 'nome' => 'davi']
-                ],
-                'telefones' => [
-                    '47992022970',
-                    '44988055775'
-                ]
-            ],
-            [
-                'nome' => 'jussara',
-                'apelido' => 'jus',
-                'filhos' => [
-                    ['idade' => 18, 'nome' => 'mikaela'],
-                    ['idade' => 24, 'nome' => 'thais']
-                ],
-                'telefones' => [
-                    '11111111111',
-                    '22222222222'
-                ]
-            ],
-            [
-                'nome' => 'delminda',
-                'apelido' => 'neisinha',
-                'filhos' => [
-                    ['idade' => 32, 'nome' => 'daniel'],
-                    ['idade' => 35, 'nome' => 'ligia'],
-                    ['idade' => 38, 'nome' => 'solano']
-                ],
-                'telefones' => [
-                    '33333333333',
-                    '44444444444',
-                    '55555555555'
-                ]
-            ]
-        ];
-        exit( $view->getDOM()->saveHTML() );
+        $view->scopes = $this->config['auth']['code']['translate']['scope-code']($_GET['scope'] ?? 'null');
+        return $view;
     }
 }

@@ -38,6 +38,19 @@ class Rest extends \base\Main {
         }
     }
 
+    protected function pdo() {
+        try {
+            parent::pdo();
+        } catch(\PDOException  $ex) {
+            throw new \rest\RestException(
+                'Erro ao connectarse ao banco de dados: '. $ex->getMessage(),
+                $ex->getCode(), 
+                500
+            );
+        }
+        return $this->pdo;
+    }
+
     protected function response() {
         header("Content-Type: application/json");
         http_response_code(200);

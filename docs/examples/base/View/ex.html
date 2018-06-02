@@ -43,18 +43,18 @@
 
 <body>
     <span data-custom="{{variavel}}">--- {{variavel}} ---</span>a
-    <div class="pessoa" view-repeat="pessoas" view-repeat-as="p">
+    <div class="pessoa" view-repeat="pessoas" view-repeat-value="p" view-repeat-key="key">
         <div class="dados pessoa-{{p.nome}}">
             <h2>Dados Pessoa</h2>
-            <span>{{p.nome}} - {{p.apelido}}</span>
+            <span>{{key}} {{p.nome}} - {{p.apelido}}</span>
         </div>
         <div class="filhos">
             <h2>Filhos</h2>
-            <span view-repeat="p.filhos" view-repeat-as="f">{{f.nome}} {{f.idade}}</span>
+            <span view-repeat="p.filhos" view-repeat-value="f">{{f.nome}} {{f.idade}}</span>
         </div>
         <div class="telefones">
             <h2>Telefones</h2>
-            <span view-repeat="p.telefones" view-repeat-as="t">{{t}}</span>
+            <span view-repeat="p.telefones" view-repeat-value="t">{{t}}</span>
         </div>
     </div>
 </body>
